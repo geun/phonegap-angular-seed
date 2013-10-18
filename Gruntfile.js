@@ -1,10 +1,11 @@
-// Generated on 2013-10-18 using generator-angular 0.4.0
+// Generated on 2013-09-28 using generator-angular 0.4.0
 'use strict';
-var LIVERELOAD_PORT = 35729;
+var LIVERELOAD_PORT = 35731;
 var lrSnippet = require('connect-livereload')({ port: LIVERELOAD_PORT });
 var mountFolder = function (connect, dir) {
   return connect.static(require('path').resolve(dir));
 };
+var proxySnippet = require('grunt-connect-proxy/lib/utils').proxyRequest;
 
 // # Globbing
 // for performance reasons we're only matching one level down:
@@ -15,6 +16,12 @@ var mountFolder = function (connect, dir) {
 module.exports = function (grunt) {
   require('load-grunt-tasks')(grunt);
   require('time-grunt')(grunt);
+
+  // reload index
+  var modRewrite = require('connect-modrewrite');
+
+  // load the proxy
+  grunt.loadNpmTasks('grunt-connect-proxy');
 
   // configurable paths
   var yeomanConfig = {
@@ -29,6 +36,10 @@ module.exports = function (grunt) {
   grunt.initConfig({
     yeoman: yeomanConfig,
     watch: {
+      haml: {
+        files: ['<%= yeoman.app %>/views/{,*/}*.haml'],
+        tasks: ['haml:dist']
+      },
       coffee: {
         files: ['<%= yeoman.app %>/scripts/{,*/}*.coffee'],
         tasks: ['coffee:dist']
@@ -51,7 +62,8 @@ module.exports = function (grunt) {
         },
         files: [
           '<%= yeoman.app %>/{,*/}*.html',
-          '.tmp/styles/{,*/}*.css',
+          '{.tmp,<%= yeoman.app %>}/**/*.html',
+          '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
           '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
           '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
@@ -74,11 +86,20 @@ module.exports = function (grunt) {
         // Change this to '0.0.0.0' to access the server from outside.
         hostname: 'localhost'
       },
+      proxies: [
+        {
+          context: '/api',
+          host: 'localhost',
+          port: 3000
+        }
+      ],
       livereload: {
         options: {
           middleware: function (connect) {
             return [
+              proxySnippet,
               lrSnippet,
+              modRewrite(['!\\.html|\\.js|\\.css|\\.swf|\\.jp(e?)g|\\.png|\\.gif$ /index.html']),
               mountFolder(connect, '.tmp'),
               mountFolder(connect, yeomanConfig.app)
             ];
@@ -141,7 +162,8 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: '<%= yeoman.app %>/scripts',
-          src: '{,*/}*.coffee',
+//          src: '{,*/}*.coffee',
+          src: '**/*.coffee',
           dest: '.tmp/scripts',
           ext: '.js'
         }]
@@ -153,6 +175,19 @@ module.exports = function (grunt) {
           src: '{,*/}*.coffee',
           dest: '.tmp/spec',
           ext: '.js'
+        }]
+      }
+    },
+    haml: {
+      dist: {
+        files: [{
+          expand: true,
+          cwd: '<%= yeoman.app %>/views',
+//          src: '{,*/}*.haml',
+          src: '**/*.haml',
+          dest: '.tmp',
+          ext: '.html',
+          flatten: false
         }]
       }
     },
@@ -283,6 +318,11 @@ module.exports = function (grunt) {
           src: [
             'generated/*'
           ]
+        }, {
+          expand: true,
+          cwd: '.tmp',
+          dest: '<%= yeoman.dist %>',
+          src:[ '**/*.html' ]
         }]
       },
       styles: {
@@ -295,16 +335,19 @@ module.exports = function (grunt) {
     concurrent: {
       server: [
         'coffee:dist',
+        'haml:dist',
         'compass:server',
         'copy:styles'
       ],
       test: [
         'coffee',
+        'haml',
         'compass',
         'copy:styles'
       ],
       dist: [
         'coffee',
+        'haml:dist',
         'compass:dist',
         'copy:styles',
         'imagemin',
@@ -352,6 +395,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'concurrent:server',
+      'configureProxies',
       'autoprefixer',
       'connect:livereload',
       'open',
@@ -362,9 +406,27 @@ module.exports = function (grunt) {
   grunt.registerTask('test', [
     'clean:server',
     'concurrent:test',
+    'configureProxies',
     'autoprefixer',
     'connect:test',
     'karma'
+  ]);
+
+// http://newtriks.com/2013/06/11/automating-angularjs-with-yeoman-grunt-and-bower/
+  grunt.registerTask('test:unit', [
+    'clean:server',
+    'concurrent:test',
+    'autoprefixer',
+    'connect:test',
+    'karma:unit'
+  ]);
+
+  grunt.registerTask('test:e2e', [
+    'clean:server',
+    'concurrent:test',
+    'autoprefixer',
+    'connect:test',
+    'karma:e2e'
   ]);
 
   grunt.registerTask('build', [
