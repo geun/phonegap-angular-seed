@@ -10,9 +10,11 @@
     "angular-resource": "~1.0.7",
     "angular-cookies": "~1.0.7",
     "angular-sanitize": "~1.0.7",
+    "angular-bootstrap": "~0.6.0",
     "angular-ui-router": "~0.2.0",
     "underscore": "~1.5.1",
-    "angular-underscore": "latest"
+    "angular-underscore": "latest",
+    "angular-phonegap": "https://github.com/JohanObrink/angular-phonegap.git"
   },
   "devDependencies": {
     "angular-mocks": "~1.0.7",
