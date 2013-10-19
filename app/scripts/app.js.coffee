@@ -1,1 +1,1 @@
-@app = angular.module("seedApp", ['ui.bootstrap', 'ui.router', 'ngResource', 'angular-underscore'])
+@app = angular.module("seedApp", ['ui.bootstrap', 'ui.router', 'ngResource', 'angular-underscore', 'PhoneGap'])

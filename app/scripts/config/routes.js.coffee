@@ -13,10 +13,10 @@ angular.module('seedApp').config ($stateProvider, $routeProvider, $urlRouterProv
         .otherwise("/")
 
       # Define 'app' states
-      $stateProvider
-        .state "home",
-          url: "/",
-          views:
-            "":
-              controller: "MainController"
-              templateUrl: "views/main.html"
+    $stateProvider
+      .state "home",
+        url: "/",
+        views:
+          "":
+            controller: "MainController"
+            templateUrl: "main.html"
