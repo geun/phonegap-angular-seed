@@ -19,4 +19,4 @@ angular.module('seedApp').config ($stateProvider, $routeProvider, $urlRouterProv
         views:
           "":
             controller: "MainController"
-            templateUrl: "main.html"
+            templateUrl: "views/main.html"

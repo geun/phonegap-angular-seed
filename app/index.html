@@ -6,24 +6,17 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="format-detection" content="telephone=no" />
     <title></title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
         <!-- build:css(.tmp) styles/main.css -->
         <link rel="stylesheet" href="styles/main.css">
         <!-- endbuild -->
 </head>
-  <body ng-app="seedApp">
-    <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-
-    <!--[if lt IE 9]>
-      <script src="bower_components/es5-shim/es5-shim.js"></script>
-      <script src="bower_components/json3/lib/json3.min.js"></script>
-    <![endif]-->
+  <body>
      <div class="navbar navbar-fixed-top">
         <div class="navbar-inner">
             <div class="container">
@@ -44,24 +37,12 @@
     $state full url = {{$state.$current.url.source}}
     </pre>
 
+    <script src="phonegap.js"></script>
     <script src="bower_components/jquery/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/underscore/underscore.js"></script>
 
         <!-- build:js scripts/plugins.js -->
-        <!--<script src="bower_components/bootstrap-sass/js/bootstrap-affix.js"></script>-->
-        <!--<script src="bower_components/bootstrap-sass/js/bootstrap-alert.js"></script>-->
-        <!--<script src="bower_components/bootstrap-sass/js/bootstrap-dropdown.js"></script>-->
-        <!--<script src="bower_components/bootstrap-sass/js/bootstrap-tooltip.js"></script>-->
-        <!--<script src="bower_components/bootstrap-sass/js/bootstrap-modal.js"></script>-->
-        <!--<script src="bower_components/bootstrap-sass/js/bootstrap-transition.js"></script>-->
-        <!--<script src="bower_components/bootstrap-sass/js/bootstrap-button.js"></script>-->
-        <!--<script src="bower_components/bootstrap-sass/js/bootstrap-popover.js"></script>-->
-        <!--<script src="bower_components/bootstrap-sass/js/bootstrap-typeahead.js"></script>-->
-        <!--<script src="bower_components/bootstrap-sass/js/bootstrap-carousel.js"></script>-->
-        <!--<script src="bower_components/bootstrap-sass/js/bootstrap-scrollspy.js"></script>-->
-        <!--<script src="bower_components/bootstrap-sass/js/bootstrap-collapse.js"></script>-->
-        <script src="bower_components/bootstrap-sass/js/bootstrap-tab.js"></script>
         <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
         <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
         <script src="bower_components/angular-underscore/angular-underscore.js"></script>
@@ -76,6 +57,8 @@
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
+        <script src="scripts/bootstarp.js"></script>
+
         <!-- config -->
 
         <script src="scripts/config/constants.js"></script>
@@ -89,7 +72,10 @@
 
         <!-- controller -->
         <script src="scripts/controllers/main.js"></script>
-
         <!-- endbuild -->
+
+        <script type="text/javascript">
+            bootstrap.initialize();
+        </script>
 </body>
 </html>

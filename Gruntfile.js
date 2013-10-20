@@ -26,7 +26,7 @@ module.exports = function (grunt) {
   // configurable paths
   var yeomanConfig = {
     app: 'app',
-    dist: 'dist'
+    dist: '../www'
   };
 
   try {
@@ -132,6 +132,7 @@ module.exports = function (grunt) {
       }
     },
     clean: {
+      options: { force: true },
       dist: {
         files: [{
           dot: true,
@@ -185,7 +186,7 @@ module.exports = function (grunt) {
           cwd: '<%= yeoman.app %>/views',
 //          src: '{,*/}*.haml',
           src: '**/*.haml',
-          dest: '.tmp',
+          dest: '.tmp/views',
           ext: '.html',
           flatten: false
         }]
