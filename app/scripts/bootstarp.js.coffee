@@ -9,6 +9,7 @@ bootstrap = {
       this.onDeviceReady()
   onDeviceReady: ()->
     _this = this
+    console.log 'onDeviceReady'
     angular.element(document).ready ()->
       angular.bootstrap(document, ['seedApp'] )
 }

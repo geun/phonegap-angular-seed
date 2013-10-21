@@ -9,38 +9,25 @@
     <meta name="format-detection" content="telephone=no" />
     <title></title>
     <meta name="description" content="">
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
+        <link rel="stylesheet" href="lib/onsen/css/onsen.css">
+        <link rel="stylesheet" href="lib/onsen/css/topcoat-mobile-light.css">
         <!-- build:css(.tmp) styles/main.css -->
-        <link rel="stylesheet" href="styles/main.css">
+
         <!-- endbuild -->
 </head>
-  <body>
-     <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container">
-                <a class="brand" ui-sref="home">Admin App</a>
-                <ul class="nav">
-                    <li ng-class="{ active: $state.includes('home')}"><a ui-sref="home">Home</a></li>
-                </ul>
-            </div>
+  <body ng-app="seedApp">
 
-        </div>
-    </div>
-    <!-- Add your site or application content here -->
-    <div class="container" ui-view></div>
-    <hr>
-    <pre>
-    $state = {{$state.current.name}}
-    $stateParams = {{$stateParams}}
-    $state full url = {{$state.$current.url.source}}
-    </pre>
+    <ons-screen page="views/home_navigator.html"></ons-screen>
 
-    <script src="phonegap.js"></script>
+    <!--<script src="phonegap.js"></script>-->
     <script src="bower_components/jquery/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/underscore/underscore.js"></script>
+    <!--<script src="bower_components/onsen/onsen.js"></script>-->
+
 
         <!-- build:js scripts/plugins.js -->
         <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
@@ -77,5 +64,7 @@
         <script type="text/javascript">
             bootstrap.initialize();
         </script>
+
+        <script src="lib/onsen/onsen.js"></script>
 </body>
 </html>

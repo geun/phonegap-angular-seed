@@ -20,6 +20,7 @@ module.exports = function(config) {
       'app/bower_components/angular-ui-router/release/angular-ui-router.js',
       'app/bower_components/angular-bootstrap/ui-bootstrap.js',
       'app/bower_components/angular-phonegap/src/PhoneGapReady.js',
+      'app/lib/onsen/onsen.js',
       'app/scripts/*.coffee',
       'app/scripts/**/*.coffee',
       '.tmp/scripts/**/*.coffee',
